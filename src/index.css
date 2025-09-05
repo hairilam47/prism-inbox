@@ -120,7 +120,8 @@
 /* Font Face & Typography */
 @layer base {
   * {
-    @apply border-border font-sans;
+    @apply font-sans;
+    border-color: hsl(var(--glass-border));
   }
   
   body {
@@ -272,15 +273,5 @@
   .scroll-smooth {
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
   }
 }
