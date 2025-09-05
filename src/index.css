@@ -1,96 +1,277 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap');
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* AI Messaging Hub Design System - Futuristic & Minimal */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Base Colors - Clean & Minimal */
+    --background: 0 0% 99%;
+    --foreground: 220 20% 8%;
+    --surface: 0 0% 100%;
+    --surface-muted: 220 15% 97%;
+    
+    /* AI & Platform Accent Colors */
+    --ai-primary: 270 60% 60%;
+    --ai-glow: 270 80% 70%;
+    --whatsapp: 120 60% 50%;
+    --whatsapp-glow: 120 70% 60%;
+    --telegram: 200 80% 55%;
+    --telegram-glow: 200 90% 65%;
+    --instagram: 320 80% 60%;
+    --instagram-glow: 320 90% 70%;
+    --gmail: 0 80% 55%;
+    --gmail-glow: 0 90% 65%;
+    --slack: 260 70% 60%;
+    --slack-glow: 260 80% 70%;
+    
+    /* Priority Colors */
+    --urgent: 0 85% 65%;
+    --urgent-glow: 0 90% 75%;
+    --soon: 45 85% 65%;
+    --soon-glow: 45 90% 75%;
+    --later: 120 45% 65%;
+    --later-glow: 120 55% 75%;
+    
+    /* Glass & Blur Effects */
+    --glass-bg: 0 0% 100% / 0.8;
+    --glass-border: 220 20% 90%;
+    --blur-overlay: 220 20% 20% / 0.1;
+    
+    /* Typography */
+    --text-primary: 220 20% 8%;
+    --text-secondary: 220 15% 40%;
+    --text-muted: 220 10% 60%;
+    
+    /* Interactive States */
+    --hover-glow: 270 60% 60% / 0.1;
+    --active-glow: 270 60% 60% / 0.2;
+    
+    /* Shadows & Glows */
+    --shadow-glass: 0 8px 32px hsl(220 20% 20% / 0.08);
+    --shadow-card: 0 4px 16px hsl(220 20% 20% / 0.06);
+    --glow-subtle: 0 0 20px hsl(var(--ai-glow) / 0.3);
+    --glow-platform: 0 0 16px;
+    
+    /* Animation Timing */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --transition-slide: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    
+    /* Component Specific */
+    --card-background: var(--glass-bg);
+    --card-border: var(--glass-border);
+    --input-background: hsl(220 20% 98%);
+    --button-primary: hsl(var(--ai-primary));
+    --button-hover: hsl(var(--ai-glow));
+    
+    /* Layout */
+    --nav-height: 60px;
+    --search-height: 56px;
+    --bottom-nav-height: 72px;
+    --container-padding: 16px;
+    
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Dark Mode - Cyberpunk Aesthetic */
+    --background: 220 25% 6%;
+    --foreground: 220 20% 92%;
+    --surface: 220 20% 8%;
+    --surface-muted: 220 20% 10%;
+    
+    /* Enhanced Neon Glows in Dark */
+    --ai-primary: 270 70% 70%;
+    --ai-glow: 270 80% 80%;
+    --whatsapp-glow: 120 80% 70%;
+    --telegram-glow: 200 90% 75%;
+    --instagram-glow: 320 90% 80%;
+    --gmail-glow: 0 90% 75%;
+    --slack-glow: 260 80% 80%;
+    
+    /* Glass Effects - Dark */
+    --glass-bg: 220 20% 10% / 0.8;
+    --glass-border: 220 20% 20%;
+    --blur-overlay: 220 20% 80% / 0.1;
+    
+    /* Typography - Dark */
+    --text-primary: 220 20% 92%;
+    --text-secondary: 220 15% 70%;
+    --text-muted: 220 10% 50%;
+    
+    /* Enhanced Glows */
+    --shadow-glass: 0 8px 32px hsl(220 20% 0% / 0.4);
+    --shadow-card: 0 4px 16px hsl(220 20% 0% / 0.3);
+    --glow-subtle: 0 0 30px hsl(var(--ai-glow) / 0.4);
+    
+    /* Dark Component Overrides */
+    --input-background: hsl(220 20% 12%);
+    --card-background: var(--glass-bg);
+  }
+}
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+/* Font Face & Typography */
+@layer base {
+  * {
+    @apply border-border font-sans;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-light;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    overflow-x: hidden;
+  }
+  
+  /* Typography Scale */
+  .text-display {
+    @apply text-4xl font-extralight tracking-tight;
+  }
+  
+  .text-heading {
+    @apply text-2xl font-light tracking-tight;
+  }
+  
+  .text-subheading {
+    @apply text-lg font-normal tracking-wide;
+  }
+  
+  .text-body {
+    @apply text-base font-light;
+  }
+  
+  .text-caption {
+    @apply text-sm font-light opacity-70;
+  }
+  
+  .text-micro {
+    @apply text-xs font-light opacity-60;
+  }
+}
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+/* Glass Morphism Components */
+@layer components {
+  .glass-card {
+    @apply bg-[--card-background] border border-[--card-border] backdrop-blur-xl;
+    box-shadow: var(--shadow-glass);
+  }
+  
+  .glass-surface {
+    @apply bg-[--glass-bg] border border-[--glass-border] backdrop-blur-lg;
+  }
+  
+  .neon-glow {
+    filter: drop-shadow(var(--glow-subtle));
+  }
+  
+  .platform-glow-whatsapp {
+    box-shadow: var(--glow-platform) hsl(var(--whatsapp-glow) / 0.4);
+  }
+  
+  .platform-glow-telegram {
+    box-shadow: var(--glow-platform) hsl(var(--telegram-glow) / 0.4);
+  }
+  
+  .platform-glow-instagram {
+    box-shadow: var(--glow-platform) hsl(var(--instagram-glow) / 0.4);
+  }
+  
+  .platform-glow-gmail {
+    box-shadow: var(--glow-platform) hsl(var(--gmail-glow) / 0.4);
+  }
+  
+  .platform-glow-slack {
+    box-shadow: var(--glow-platform) hsl(var(--slack-glow) / 0.4);
+  }
+}
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+/* Animations & Transitions */
+@layer utilities {
+  .animate-slide-down {
+    animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .animate-glow-pulse {
+    animation: glowPulse 2s ease-in-out infinite;
+  }
+  
+  .animate-card-hover {
+    transition: var(--transition-smooth);
+  }
+  
+  .animate-card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card), var(--glow-subtle);
+  }
+  
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+  
+  .transition-slide {
+    transition: var(--transition-slide);
+  }
+}
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+@keyframes slideUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+@keyframes glowPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px hsl(var(--ai-glow) / 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px hsl(var(--ai-glow) / 0.6));
+  }
+}
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+/* Touch & Mobile Optimizations */
+@layer utilities {
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+  
+  .touch-none {
+    touch-action: none;
+  }
+  
+  .scroll-smooth {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
