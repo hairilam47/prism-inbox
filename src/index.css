@@ -13,9 +13,15 @@
     --surface: 0 0% 100%;
     --surface-muted: 220 15% 97%;
     
+    /* Theme Variables - Default: Neutral */
+    --theme-primary: 220 25% 55%;
+    --theme-primary-glow: 220 35% 65%;
+    --theme-accent: 220 20% 50%;
+    --theme-accent-glow: 220 25% 60%;
+    
     /* AI & Platform Accent Colors */
-    --ai-primary: 270 60% 60%;
-    --ai-glow: 270 80% 70%;
+    --ai-primary: var(--theme-primary);
+    --ai-glow: var(--theme-primary-glow);
     --whatsapp: 120 60% 50%;
     --whatsapp-glow: 120 70% 60%;
     --telegram: 200 80% 55%;
@@ -32,8 +38,8 @@
     --urgent-glow: 0 90% 75%;
     --soon: 45 85% 65%;
     --soon-glow: 45 90% 75%;
-    --later: 120 45% 65%;
-    --later-glow: 120 55% 75%;
+    --later: var(--theme-accent);
+    --later-glow: var(--theme-accent-glow);
     
     /* Glass & Blur Effects */
     --glass-bg: 0 0% 100% / 0.8;
@@ -46,13 +52,13 @@
     --text-muted: 220 10% 60%;
     
     /* Interactive States */
-    --hover-glow: 270 60% 60% / 0.1;
-    --active-glow: 270 60% 60% / 0.2;
+    --hover-glow: var(--theme-primary) / 0.1;
+    --active-glow: var(--theme-primary) / 0.2;
     
     /* Shadows & Glows */
     --shadow-glass: 0 8px 32px hsl(220 20% 20% / 0.08);
     --shadow-card: 0 4px 16px hsl(220 20% 20% / 0.06);
-    --glow-subtle: 0 0 20px hsl(var(--ai-glow) / 0.3);
+    --glow-subtle: 0 0 20px hsl(var(--theme-primary-glow) / 0.3);
     --glow-platform: 0 0 16px;
     
     /* Animation Timing */
@@ -64,8 +70,8 @@
     --card-background: var(--glass-bg);
     --card-border: var(--glass-border);
     --input-background: hsl(220 20% 98%);
-    --button-primary: hsl(var(--ai-primary));
-    --button-hover: hsl(var(--ai-glow));
+    --button-primary: hsl(var(--theme-primary));
+    --button-hover: hsl(var(--theme-primary-glow));
     
     /* Layout */
     --nav-height: 60px;
@@ -87,9 +93,15 @@
     --surface: 220 20% 8%;
     --surface-muted: 220 20% 10%;
     
+    /* Theme Colors Enhanced for Dark Mode */
+    --theme-primary: var(--theme-primary-dark, 220 35% 70%);
+    --theme-primary-glow: var(--theme-primary-glow-dark, 220 45% 80%);
+    --theme-accent: var(--theme-accent-dark, 220 30% 65%);
+    --theme-accent-glow: var(--theme-accent-glow-dark, 220 35% 75%);
+    
     /* Enhanced Neon Glows in Dark */
-    --ai-primary: 270 70% 70%;
-    --ai-glow: 270 80% 80%;
+    --ai-primary: var(--theme-primary);
+    --ai-glow: var(--theme-primary-glow);
     --whatsapp-glow: 120 80% 70%;
     --telegram-glow: 200 90% 75%;
     --instagram-glow: 320 90% 80%;
@@ -109,11 +121,60 @@
     /* Enhanced Glows */
     --shadow-glass: 0 8px 32px hsl(220 20% 0% / 0.4);
     --shadow-card: 0 4px 16px hsl(220 20% 0% / 0.3);
-    --glow-subtle: 0 0 30px hsl(var(--ai-glow) / 0.4);
+    --glow-subtle: 0 0 30px hsl(var(--theme-primary-glow) / 0.4);
     
     /* Dark Component Overrides */
     --input-background: hsl(220 20% 12%);
     --card-background: var(--glass-bg);
+  }
+
+  /* Theme Variants */
+  .theme-calm-green {
+    --theme-primary: 140 30% 55%;
+    --theme-primary-glow: 140 40% 65%;
+    --theme-accent: 140 25% 50%;
+    --theme-accent-glow: 140 30% 60%;
+    
+    --theme-primary-dark: 140 40% 65%;
+    --theme-primary-glow-dark: 140 50% 75%;
+    --theme-accent-dark: 140 35% 60%;
+    --theme-accent-glow-dark: 140 40% 70%;
+  }
+
+  .theme-soft-purple {
+    --theme-primary: 270 35% 60%;
+    --theme-primary-glow: 270 45% 70%;
+    --theme-accent: 270 30% 55%;
+    --theme-accent-glow: 270 35% 65%;
+    
+    --theme-primary-dark: 270 45% 70%;
+    --theme-primary-glow-dark: 270 55% 80%;
+    --theme-accent-dark: 270 40% 65%;
+    --theme-accent-glow-dark: 270 45% 75%;
+  }
+
+  .theme-ocean-blue {
+    --theme-primary: 180 60% 50%;
+    --theme-primary-glow: 180 70% 60%;
+    --theme-accent: 180 55% 45%;
+    --theme-accent-glow: 180 60% 55%;
+    
+    --theme-primary-dark: 180 70% 60%;
+    --theme-primary-glow-dark: 180 80% 70%;
+    --theme-accent-dark: 180 65% 55%;
+    --theme-accent-glow-dark: 180 70% 65%;
+  }
+
+  .theme-warm-neutral {
+    --theme-primary: 35 25% 50%;
+    --theme-primary-glow: 35 35% 60%;
+    --theme-accent: 35 20% 45%;
+    --theme-accent-glow: 35 25% 55%;
+    
+    --theme-primary-dark: 45 40% 65%;
+    --theme-primary-glow-dark: 45 50% 75%;
+    --theme-accent-dark: 45 35% 60%;
+    --theme-accent-glow-dark: 45 40% 70%;
   }
 }
 
@@ -253,10 +314,10 @@
 
 @keyframes glowPulse {
   0%, 100% {
-    filter: drop-shadow(0 0 8px hsl(var(--ai-glow) / 0.3));
+    filter: drop-shadow(0 0 8px hsl(var(--theme-primary-glow) / 0.3));
   }
   50% {
-    filter: drop-shadow(0 0 20px hsl(var(--ai-glow) / 0.6));
+    filter: drop-shadow(0 0 20px hsl(var(--theme-primary-glow) / 0.6));
   }
 }
 

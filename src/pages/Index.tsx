@@ -6,6 +6,8 @@ import { AIDigestBox } from "@/components/AIDigestBox";
 import { PriorityCard, PriorityCardData } from "@/components/PriorityCard";
 import { BottomNavigation } from "@/components/BottomNavigation";
 import { TasksTab } from "@/components/TasksTab";
+import { SettingsTab } from "@/components/SettingsTab";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 // Mock data for priority cards
 const mockPriorityData: PriorityCardData[] = [
@@ -83,57 +85,57 @@ const Index = () => {
     setPriorityCards(prev => prev.filter(card => card.id !== cardId));
   };
 
-  if (activeTab === "tasks") {
-    return (
+  return (
+    <ThemeProvider>
       <div className="min-h-screen bg-background">
         <CollapsibleSearch />
-        <TasksTab />
-        <BottomNavigation activeTab={activeTab} onTabChange={setActiveTab} />
-      </div>
-    );
-  }
-
-  return (
-    <div className="min-h-screen bg-background">
-      {/* Collapsible Search */}
-      <CollapsibleSearch />
-      
-      {/* Platform Navigation */}
-      <PlatformNavigation />
-      
-      {/* AI Digest Box */}
-      <AIDigestBox />
-      
-      {/* Priority Feed */}
-      <div className="pb-bottom-nav">
-        {priorityCards.map((card) => (
-          <PriorityCard
-            key={card.id}
-            data={card}
-            onSwipeLeft={() => handleCardSwipeLeft(card.id)}
-            onSwipeRight={() => handleCardSwipeRight(card.id)}
-          />
-        ))}
         
-        {/* Empty State */}
-        {priorityCards.length === 0 && (
-          <div className="px-container-padding py-12 text-center">
-            <div className="w-16 h-16 bg-ai-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <MessageCircle className="h-8 w-8 text-ai-primary" />
+        {activeTab === "priority" && (
+          <>
+            <PlatformNavigation />
+            <AIDigestBox />
+            <div className="pb-bottom-nav">
+              {priorityCards.map((card) => (
+                <PriorityCard
+                  key={card.id}
+                  data={card}
+                  onSwipeLeft={() => handleCardSwipeLeft(card.id)}
+                  onSwipeRight={() => handleCardSwipeRight(card.id)}
+                />
+              ))}
+              
+              {priorityCards.length === 0 && (
+                <div className="px-container-padding py-12 text-center">
+                  <div className="w-16 h-16 bg-ai-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <MessageCircle className="h-8 w-8 text-ai-primary" />
+                  </div>
+                  <h3 className="text-subheading text-text-primary mb-2">
+                    Inbox Zero Achieved! 🎉
+                  </h3>
+                  <p className="text-caption text-text-muted">
+                    All your messages have been processed. Great job staying on top of everything!
+                  </p>
+                </div>
+              )}
             </div>
-            <h3 className="text-subheading text-text-primary mb-2">
-              Inbox Zero Achieved! 🎉
-            </h3>
-            <p className="text-caption text-text-muted">
-              All your messages have been processed. Great job staying on top of everything!
-            </p>
+          </>
+        )}
+        
+        {activeTab === "tasks" && <TasksTab />}
+        
+        {activeTab === "all-chats" && (
+          <div className="px-4 pb-24 pt-6">
+            <div className="text-center py-12">
+              <p className="text-text-muted">All Chats view coming soon...</p>
+            </div>
           </div>
         )}
+        
+        {activeTab === "settings" && <SettingsTab />}
+        
+        <BottomNavigation activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
-      
-      {/* Bottom Navigation */}
-      <BottomNavigation activeTab={activeTab} onTabChange={setActiveTab} />
-    </div>
+    </ThemeProvider>
   );
 };
 
