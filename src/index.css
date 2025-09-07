@@ -32,6 +32,16 @@
     --gmail-glow: 0 90% 65%;
     --slack: 260 70% 60%;
     --slack-glow: 260 80% 70%;
+    --yahoo: 270 70% 55%;
+    --yahoo-glow: 270 80% 65%;
+    --messenger: 220 100% 50%;
+    --messenger-glow: 220 100% 60%;
+    --line: 120 100% 40%;
+    --line-glow: 120 100% 50%;
+    --wechat: 90 60% 45%;
+    --wechat-glow: 90 70% 55%;
+    --kakaotalk: 45 95% 55%;
+    --kakaotalk-glow: 45 100% 65%;
     
     /* Priority Colors */
     --urgent: 0 85% 65%;

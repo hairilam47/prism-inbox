@@ -115,7 +115,9 @@ export const PlatformNavigation = () => {
           {/* Add Platform Button */}
           <CarouselItem className="basis-auto pl-3 pr-container-padding">
             <div className="relative">
-              <button className="
+              <button 
+                onClick={() => navigate("/add-platform")}
+                className="
                 w-14 h-14 rounded-2xl 
                 bg-background/20 backdrop-blur-sm border-2 border-dashed border-border/40
                 flex items-center justify-center

@@ -48,6 +48,16 @@ export default {
 					'gmail-glow': 'hsl(var(--gmail-glow))',
 					slack: 'hsl(var(--slack))',
 					'slack-glow': 'hsl(var(--slack-glow))',
+					yahoo: 'hsl(var(--yahoo))',
+					'yahoo-glow': 'hsl(var(--yahoo-glow))',
+					messenger: 'hsl(var(--messenger))',
+					'messenger-glow': 'hsl(var(--messenger-glow))',
+					line: 'hsl(var(--line))',
+					'line-glow': 'hsl(var(--line-glow))',
+					wechat: 'hsl(var(--wechat))',
+					'wechat-glow': 'hsl(var(--wechat-glow))',
+					kakaotalk: 'hsl(var(--kakaotalk))',
+					'kakaotalk-glow': 'hsl(var(--kakaotalk-glow))',
 				},
 				
 				// Priority Colors
