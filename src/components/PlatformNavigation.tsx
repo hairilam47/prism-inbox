@@ -1,4 +1,5 @@
-import { MessageCircle, Send, Camera, Mail, Hash } from "lucide-react";
+import { MessageCircle, Send, Camera, Mail, Hash, Plus } from "lucide-react";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 
 interface Platform {
   id: string;
@@ -54,50 +55,82 @@ const platforms: Platform[] = [
 
 export const PlatformNavigation = () => {
   return (
-    <div className="px-container-padding py-4">
-      <div className="flex justify-between items-center space-x-3">
-        {platforms.map((platform) => {
-          const IconComponent = platform.icon;
+    <div className="py-4">
+      <Carousel
+        opts={{
+          align: "start",
+          dragFree: true,
+          skipSnaps: false,
+        }}
+        className="w-full"
+      >
+        <CarouselContent className="ml-container-padding">
+          {platforms.map((platform) => {
+            const IconComponent = platform.icon;
+            
+            return (
+              <CarouselItem key={platform.id} className="basis-auto pl-3">
+                <div className="relative">
+                  <button className={`
+                    w-14 h-14 rounded-2xl 
+                    bg-background/40 backdrop-blur-sm border border-border/20
+                    flex items-center justify-center
+                    shadow-sm hover:shadow-md
+                    hover:scale-105 active:scale-95
+                    transition-all duration-200 ease-smooth
+                    touch-manipulation
+                    group
+                  `}>
+                    <IconComponent className={`
+                      h-5 w-5 text-${platform.color}/70
+                      group-hover:text-${platform.color}
+                      group-hover:scale-110 
+                      transition-all duration-200
+                    `} />
+                    
+                    {/* Unread Dot Indicator */}
+                    {platform.unreadCount > 0 && (
+                      <div className="absolute -top-1 -right-1 w-3 h-3 bg-priority-urgent rounded-full animate-glow-pulse shadow-sm" />
+                    )}
+                  </button>
+                  
+                  {/* Platform Label */}
+                  <p className="text-xs text-text-muted text-center mt-1.5 truncate w-14">
+                    {platform.name}
+                  </p>
+                </div>
+              </CarouselItem>
+            );
+          })}
           
-          return (
-            <div
-              key={platform.id}
-              className="relative flex-1 max-w-[72px]"
-            >
-              <button className={`
-                w-full aspect-square rounded-xl 
-                glass-surface 
+          {/* Add Platform Button */}
+          <CarouselItem className="basis-auto pl-3 pr-container-padding">
+            <div className="relative">
+              <button className="
+                w-14 h-14 rounded-2xl 
+                bg-background/20 backdrop-blur-sm border-2 border-dashed border-border/40
                 flex items-center justify-center
-                ${platform.glowClass}
+                hover:border-primary/40 hover:bg-background/30
                 hover:scale-105 active:scale-95
                 transition-all duration-200 ease-smooth
                 touch-manipulation
                 group
-              `}>
-                <IconComponent className={`
-                  h-6 w-6 text-${platform.color}
+              ">
+                <Plus className="
+                  h-5 w-5 text-text-muted 
+                  group-hover:text-primary
                   group-hover:scale-110 
-                  transition-transform duration-200
-                `} />
-                
-                {/* Unread Indicator */}
-                {platform.unreadCount > 0 && (
-                  <div className="absolute -top-1 -right-1 min-w-[18px] h-[18px] bg-priority-urgent rounded-full flex items-center justify-center animate-glow-pulse">
-                    <span className="text-[10px] font-medium text-white px-1">
-                      {platform.unreadCount > 9 ? '9+' : platform.unreadCount}
-                    </span>
-                  </div>
-                )}
+                  transition-all duration-200
+                " />
               </button>
               
-              {/* Platform Label */}
-              <p className="text-micro text-text-muted text-center mt-1 truncate">
-                {platform.name}
+              <p className="text-xs text-text-muted text-center mt-1.5 truncate w-14">
+                Add
               </p>
             </div>
-          );
-        })}
-      </div>
+          </CarouselItem>
+        </CarouselContent>
+      </Carousel>
     </div>
   );
 };
