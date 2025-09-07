@@ -1,5 +1,6 @@
 import { MessageCircle, Send, Camera, Mail, Hash, Plus } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { useNavigate } from "react-router-dom";
 
 interface Platform {
   id: string;
@@ -54,6 +55,12 @@ const platforms: Platform[] = [
 ];
 
 export const PlatformNavigation = () => {
+  const navigate = useNavigate();
+
+  const handlePlatformClick = (platformId: string) => {
+    navigate(`/platform/${platformId}`);
+  };
+
   return (
     <div className="py-4">
       <Carousel
@@ -71,16 +78,18 @@ export const PlatformNavigation = () => {
             return (
               <CarouselItem key={platform.id} className="basis-auto pl-3">
                 <div className="relative">
-                  <button className={`
-                    w-14 h-14 rounded-2xl 
-                    bg-background/40 backdrop-blur-sm border border-border/20
-                    flex items-center justify-center
-                    shadow-sm hover:shadow-md
-                    hover:scale-105 active:scale-95
-                    transition-all duration-200 ease-smooth
-                    touch-manipulation
-                    group
-                  `}>
+                  <button 
+                    onClick={() => handlePlatformClick(platform.id)}
+                    className={`
+                      w-14 h-14 rounded-2xl 
+                      bg-background/40 backdrop-blur-sm border border-border/20
+                      flex items-center justify-center
+                      shadow-sm hover:shadow-md
+                      hover:scale-105 active:scale-95
+                      transition-all duration-200 ease-smooth
+                      touch-manipulation
+                      group
+                    `}>
                     <IconComponent className={`
                       h-5 w-5 text-${platform.color}/70
                       group-hover:text-${platform.color}
