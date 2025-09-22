@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MessageCircle, Send, Camera, Mail, Hash } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { CollapsibleSearch } from "@/components/CollapsibleSearch";
 import { PlatformNavigation } from "@/components/PlatformNavigation";
 import { AIDigestBox } from "@/components/AIDigestBox";
@@ -74,6 +75,15 @@ const mockPriorityData: PriorityCardData[] = [
 const Index = () => {
   const [activeTab, setActiveTab] = useState("priority");
   const [priorityCards, setPriorityCards] = useState(mockPriorityData);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if user has completed onboarding
+    const hasCompletedOnboarding = localStorage.getItem('onboarding_completed');
+    if (!hasCompletedOnboarding) {
+      navigate('/onboarding');
+    }
+  }, [navigate]);
 
   const handleCardSwipeLeft = (cardId: string) => {
     // Snooze action
