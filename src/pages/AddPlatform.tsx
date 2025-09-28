@@ -4,6 +4,7 @@ import { ArrowLeft, Search, Check } from "lucide-react";
 import { MessageCircle, Send, Camera, Mail, Hash, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { ConnectPlatformModal } from "@/components/ConnectPlatformModal";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
 interface Platform {
@@ -102,29 +103,33 @@ const AddPlatform = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [platforms, setPlatforms] = useState(availablePlatforms);
-  const [connectingPlatform, setConnectingPlatform] = useState<string | null>(null);
+  const [selectedPlatform, setSelectedPlatform] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const filteredPlatforms = platforms.filter(platform =>
     platform.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleConnectPlatform = (platformId: string) => {
-    setConnectingPlatform(platformId);
-    
-    // Simulate connection process
-    setTimeout(() => {
-      setPlatforms(prev => 
-        prev.map(p => 
-          p.id === platformId ? { ...p, connected: true } : p
-        )
-      );
-      setConnectingPlatform(null);
-      
-      // Show success message and navigate back after a moment
-      setTimeout(() => {
-        navigate("/");
-      }, 1000);
-    }, 2000);
+    setSelectedPlatform(platformId);
+    setModalOpen(true);
+  };
+
+  const handleModalConnect = (platformId: string) => {
+    setPlatforms(prev => 
+      prev.map(p => 
+        p.id === platformId ? { ...p, connected: true } : p
+      )
+    );
+  };
+
+  const handleGoToInbox = () => {
+    navigate("/");
+  };
+
+  const handleAddAnother = () => {
+    setModalOpen(false);
+    setSelectedPlatform(null);
   };
 
   return (
@@ -154,21 +159,18 @@ const AddPlatform = () => {
           <div className="grid grid-cols-2 gap-4 mb-6">
             {filteredPlatforms.map((platform) => {
               const IconComponent = platform.icon;
-              const isConnecting = connectingPlatform === platform.id;
               
               return (
                 <button
                   key={platform.id}
-                  onClick={() => !platform.connected && !isConnecting && handleConnectPlatform(platform.id)}
-                  disabled={platform.connected || isConnecting}
+                  onClick={() => !platform.connected && handleConnectPlatform(platform.id)}
+                  disabled={platform.connected}
                   className={`
                     p-4 rounded-2xl border border-border/20 bg-surface/50 backdrop-blur-sm
                     transition-all duration-200 ease-smooth
                     ${platform.connected 
                       ? 'opacity-75 cursor-default' 
-                      : isConnecting 
-                        ? 'opacity-75 cursor-wait' 
-                        : 'hover:scale-[1.02] hover:shadow-md hover:border-border/40 active:scale-[0.98]'
+                      : 'hover:scale-[1.02] hover:shadow-md hover:border-border/40 active:scale-[0.98]'
                     }
                     touch-manipulation
                   `}
@@ -187,7 +189,6 @@ const AddPlatform = () => {
                       ) : (
                         <IconComponent className={`
                           h-6 w-6 
-                          ${isConnecting ? 'animate-pulse' : ''}
                           text-${platform.color}
                         `} />
                       )}
@@ -198,12 +199,7 @@ const AddPlatform = () => {
                         {platform.name}
                       </h3>
                       <p className="text-xs text-text-muted">
-                        {platform.connected 
-                          ? "Connected" 
-                          : isConnecting 
-                            ? "Connecting..." 
-                            : platform.description
-                        }
+                        {platform.connected ? "Connected" : platform.description}
                       </p>
                     </div>
                   </div>
@@ -246,21 +242,16 @@ const AddPlatform = () => {
           </div>
         </div>
 
-        {/* Connection Overlay */}
-        {connectingPlatform && (
-          <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50">
-            <div className="bg-surface border border-border/20 rounded-2xl p-6 mx-4 max-w-sm w-full text-center">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-              </div>
-              <h3 className="text-lg font-semibold text-text-primary mb-2">
-                Connecting...
-              </h3>
-              <p className="text-sm text-text-muted">
-                Authenticating with {platforms.find(p => p.id === connectingPlatform)?.name}
-              </p>
-            </div>
-          </div>
+        {/* Connect Platform Modal */}
+        {selectedPlatform && (
+          <ConnectPlatformModal
+            isOpen={modalOpen}
+            onClose={() => setModalOpen(false)}
+            platform={selectedPlatform as 'gmail' | 'slack' | 'telegram'}
+            onConnect={handleModalConnect}
+            onAddAnother={handleAddAnother}
+            onGoToInbox={handleGoToInbox}
+          />
         )}
       </div>
     </ThemeProvider>
